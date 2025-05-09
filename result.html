@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prediction Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff5f5;
+      color: #4a0000;
+      padding: 40px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #b30000;
+      margin-bottom: 10px;
+    }
+
+    .result {
+      font-size: 24px;
+      font-weight: bold;
+      color: #4a0000;
+      margin-top: 30px;
+    }
+
+    a {
+      margin: 0 10px;
+      color: #b30000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>❤️ HEART DISEASE PREDICTION</h1>
+
+  <div class="result">
+    {{ result }} ({{ prob }})
+  </div>
+
+  <br><br>
+  <a href="/">Back</a> | <a href="/records">View All Records</a>
+</body>
+</html>

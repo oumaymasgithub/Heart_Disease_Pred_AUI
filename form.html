@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Heart Disease Prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff5f5;
+      color: #4a0000;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #b30000;
+      font-size: 28px;
+      text-align: center;
+    }
+
+    h2, h3 {
+      color: #b30000;
+    }
+
+    form {
+      background-color: #ffe6e6;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ffcccc;
+      margin-bottom: 40px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+
+    input[type="number"], input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ffcccc;
+      border-radius: 5px;
+    }
+
+    input[type="submit"] {
+      background-color: #cc0000;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #990000;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: center;
+      border: 1px solid #ffcccc;
+      word-break: break-word;
+    }
+
+    th {
+      background-color: #ff9999;
+      color: #4a0000;
+    }
+
+    tr:nth-child(even) {
+      background-color: #fff0f0;
+    }
+  </style>
+</head>
+<body>
+  <h1>❤️ HEART DISEASE PREDICTION</h1>
+
+  <form action="/predict" method="post">
+    <label>Name:</label>
+    <input type="text" name="name" required>
+
+    <h3><strong>Clinical Data</strong></h3>
+    <label>Age:</label>
+    <input type="number" name="age" required>
+
+    <label>Sex (0 = Female, 1 = Male):</label>
+    <input type="number" name="sex" min="0" max="1" required>
+
+    <label>Resting Blood Pressure (trestbps):</label>
+    <input type="number" name="trestbps" required>
+
+    <label>Cholesterol:</label>
+    <input type="number" name="chol" required>
+
+    <label>Fasting Blood Sugar (fbs):</label>
+    <input type="number" name="fbs" min="0" max="1" required>
+
+    <label>Resting ECG (restecg):</label>
+    <input type="number" name="restecg" required>
+
+    <label>Max Heart Rate (thalach):</label>
+    <input type="number" name="thalach" required>
+
+    <label>Number of Major Vessels (ca):</label>
+    <input type="number" name="ca" required>
+
+    <label>Thal (0 = normal, 1 = fixed defect, 2 = reversible defect):</label>
+    <input type="number" name="thal" required>
+
+    <h3><strong>Lifestyle & Stress Test</strong></h3>
+    <label>Chest Pain Type (cp):</label>
+    <input type="number" name="cp" required>
+
+    <label>Exercise-Induced Angina (exang):</label>
+    <input type="number" name="exang" min="0" max="1" required>
+
+    <label>ST Depression (oldpeak):</label>
+    <input type="number" step="0.1" name="oldpeak" required>
+
+    <label>Slope of ST Segment (slope):</label>
+    <input type="number" name="slope" required>
+
+    <h3><strong>Cardio Model Data</strong></h3>
+    <label>Gender (1 = Male, 2 = Female):</label>
+    <input type="number" name="gender" min="1" max="2" required>
+
+    <label>Height (cm):</label>
+    <input type="number" name="height" required>
+
+    <label>Weight (kg):</label>
+    <input type="number" name="weight" required>
+
+    <label>Systolic BP (ap_hi):</label>
+    <input type="number" name="ap_hi" required>
+
+    <label>Diastolic BP (ap_lo):</label>
+    <input type="number" name="ap_lo" required>
+
+    <label>Cholesterol Level (1 = normal, 2 = above normal, 3 = well above):</label>
+    <input type="number" name="cholesterol" min="1" max="3" required>
+
+    <label>Glucose Level (1 = normal, 2 = above normal, 3 = well above):</label>
+    <input type="number" name="gluc" min="1" max="3" required>
+
+    <label>Smoker (0 = No, 1 = Yes):</label>
+    <input type="number" name="smoke" min="0" max="1" required>
+
+    <label>Alcohol Intake (0 = No, 1 = Yes):</label>
+    <input type="number" name="alco" min="0" max="1" required>
+
+    <label>Physically Active (0 = No, 1 = Yes):</label>
+    <input type="number" name="active" min="0" max="1" required>
+
+    <input type="submit" value="Predict">
+  </form>
+
+  <h2>Recent Predictions</h2>
+  <div style="overflow-x:auto;">
+    <table>
+      <tr>
+        <th>ID</th><th>Name</th><th>Age</th><th>Sex</th><th>CP</th><th>trestbps</th><th>chol</th><th>fbs</th>
+        <th>restecg</th><th>thalach</th><th>exang</th><th>oldpeak</th><th>slope</th><th>ca</th><th>thal</th>
+        <th>Gender</th><th>Height</th><th>Weight</th><th>ap_hi</th><th>ap_lo</th>
+        <th>CholLvl</th><th>GlucLvl</th><th>Smoker</th><th>Alco</th><th>Active</th>
+        <th>Prediction</th><th>Probability</th><th>Date</th>
+      </tr>
+      {% for row in records %}
+      <tr>
+        {% for col in row %}
+        <td>{{ col }}</td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</body>
+</html>
